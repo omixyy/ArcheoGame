@@ -71,6 +71,8 @@ while flag is False:
             print('Так себе результат. Храм будет небезопасен для будущих исследований')
         if 'ability' in reader[choice]:
             print(reader[choice]['ability'])
+        
+        # Предложение пользователю сыграть ещё раз
         question = input('\nНе хотите сыграть ещё раз? Ответьте "Да" или "Нет" \n')
         if question.lower() == 'да':
             temple_damage = 0
