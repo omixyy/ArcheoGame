@@ -4,6 +4,7 @@ import os
 from inputimeout import inputimeout as inptout
 
 
+# Функции для упрощения основного кода
 def save_progress(ch, temd, abil):
     with open('archeogame_saved_info.txt', 'w') as text:
         text.write(f'{ch}\n{temd}\n{abil}\n')
@@ -17,18 +18,19 @@ def check_os():
     return name
 
 
+# Начальные значения переменных
 temple_damage = 0
 keys, ability = list(), '-'
 flag = False
 attempts = 2
 question, choice_copy = '', ''
-
-# Проверка названия ОС
 fn_name = check_os()
 
+# Считывание сюжета из файла archeogame_data.json
 with open('archeogame_data.json', 'r', encoding='utf-8') as jsonfile:
     reader = json.load(jsonfile)
 
+# Считывание сохранённой информации из файла archeogame_saved_info.txt
 with open('archeogame_saved_info.txt', 'r') as textfile:
     rd = list(map(str.rstrip, textfile.readlines()))
     lvl, td, sp = rd[0], rd[1], rd[2]
@@ -45,8 +47,11 @@ with open('archeogame_saved_info.txt', 'r') as textfile:
         ability = sp
     os.system(fn_name)
 
+# Главный цикл
 while flag is False:
     print(f'{reader[choice]["text"]}\n')
+    
+    # Проверка наличия дополнительных параметров уровня и возможности игрока пользоваться ими
     if 'helpful ability' in reader[choice] and reader[choice]['helpful ability'] in ability:
         print(f'{reader[choice]["text2"]}\n')
     if 'attempts' in reader[choice]:
@@ -54,7 +59,7 @@ while flag is False:
             attempts = 2
         attempts += int(reader[choice]['attempts'])
         print(f'Попыток осталось: {attempts}\n')
-
+        
     # Проверка на окончание сюжетной линии
     if 'lost' in reader[choice] or attempts == 0 or 'win' in reader[choice]:
         flag = True
@@ -100,6 +105,8 @@ while flag is False:
                 while choice not in keys:
                     choice = input('\nТакого варианта нет! Введите один из данных Вам вариантов: ')
             else:
+                
+                # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции inptout
                 try:
                     choice = inptout(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ')
                 except Exception:
@@ -113,6 +120,8 @@ while flag is False:
                         continue
                 if choice not in keys:
                     choice = 'er'
+            
+            # Проверка наличия специальных игровых параметров в уровне
             choice_copy = choice
             if 'temple damage' in reader[choice]:
                 temple_damage += int(reader[choice]['temple damage'])
