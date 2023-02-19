@@ -137,7 +137,7 @@
             "r2": "Пойти в среднюю дверь",
             "r3": "Пойти в правую дверь"
         },
-        "probability": [1],
+        "probability": [1, 2, 3, 4],
         "choice_change": "spell1_lose"
     },
     "spell2": {
