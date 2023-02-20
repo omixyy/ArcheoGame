@@ -42,6 +42,7 @@ with open('archeogame_saved_info.txt', 'r') as textfile:
             choice = '0'
     else:
         choice = '0'
+
     temple_damage = int(td)
     if len(sp) != 0:
         ability = sp
@@ -107,6 +108,7 @@ while flag is False:
                 # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции inptout
                 try:
                     choice = inptout(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ')
+
                 except Exception:
                     if choice_copy in ['21', '28', '29', '30']:
                         choice = 't.o'
@@ -116,6 +118,7 @@ while flag is False:
                         choice = 't.o2'
                         os.system(check_os())
                         continue
+
                 if choice not in keys:
                     choice = 'er'
             
@@ -125,6 +128,7 @@ while flag is False:
                 temple_damage += int(reader[choice]['temple damage'])
             if 'ability' in reader[choice]:
                 ability = reader[choice]['ability']
+
         save_progress(choice, temple_damage, ability)
 
     # Добавляю random в отдельные этапы
