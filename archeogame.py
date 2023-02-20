@@ -91,7 +91,7 @@ while flag is False:
         save_progress(choice, '0', ability)
 
     # Основной код
-    if reader[choice] not in ['mundare', 'reficere', 'vendere'] and (question == '' or question.lower() == 'да'):
+    if 'sp' not in reader[choice] and (question == '' or question.lower() == 'да'):
         if 'lost' not in reader[choice]:
             for key, val in reader[choice]['choices'].items():
                 print(f'{key} - {val}')
