@@ -4,12 +4,13 @@ import os
 from inputimeout import inputimeout as inptout
 
 
-# Функции для упрощения основного кода
+# Функция сохранения прогресса
 def save_progress(ch, temd, abil):
     with open('archeogame_saved_info.txt', 'w') as text:
         text.write(f'{ch}\n{temd}\n{abil}\n')
 
 
+# Функция проверки названия ОС
 def check_os():
     if 'ux' in os.name or 'ix' in os.name:
         name = 'clear'
@@ -24,7 +25,6 @@ keys, ability = list(), '-'
 flag = False
 attempts = 2
 question, choice_copy = '', ''
-fn_name = check_os()
 
 # Считывание сюжета из файла archeogame_data.json
 with open('archeogame_data.json', 'r', encoding='utf-8') as jsonfile:
@@ -45,7 +45,7 @@ with open('archeogame_saved_info.txt', 'r') as textfile:
     temple_damage = int(td)
     if len(sp) != 0:
         ability = sp
-    os.system(fn_name)
+    os.system(check_os())
 
 # Главный цикл
 while flag is False:
@@ -81,7 +81,7 @@ while flag is False:
             attempts = 2
             choice_copy = choice
             choice = '0'
-            os.system(fn_name)
+            os.system(check_os())
             print(f'{reader[choice]["text"]}\n')
         else:
             choice_copy = choice
@@ -114,11 +114,11 @@ while flag is False:
                 except Exception:
                     if choice_copy in ['21', '28', '29', '30']:
                         choice = 't.o'
-                        os.system(fn_name)
+                        os.system(check_os())
                         continue
                     else:
                         choice = 't.o2'
-                        os.system(fn_name)
+                        os.system(check_os())
                         continue
                 if choice not in keys:
                     choice = 'er'
@@ -137,4 +137,4 @@ while flag is False:
             choice = reader[choice]['choice_change']
 
     keys.clear()
-    os.system(fn_name)
+    os.system(check_os())
