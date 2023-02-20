@@ -69,8 +69,6 @@ while flag is False:
             print('Хорошая работа! Это не такой значительный урон. Храм будет безопасен для следующих исследований')
         elif 'win' in reader[choice_copy]:
             print('Так себе результат. Храм будет небезопасен для будущих исследований')
-        if 'ability' in reader[choice]:
-            print(reader[choice]['ability'])
         
         # Предложение пользователю сыграть ещё раз
         question = input('\nНе хотите сыграть ещё раз? Ответьте "Да" или "Нет" \n')
@@ -84,8 +82,6 @@ while flag is False:
             os.system(check_os())
             print(f'{reader[choice]["text"]}\n')
         else:
-            choice_copy = choice
-            choice = '0'
             flag = True
             continue
         save_progress(choice, '0', ability)
