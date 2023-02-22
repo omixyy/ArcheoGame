@@ -40,6 +40,7 @@ with open('archeogame_saved_info.txt', 'r') as textfile:
             choice = lvl
         else:
             choice = '0'
+            save_progress('0', '0', '-')
     else:
         choice = '0'
 
@@ -51,7 +52,7 @@ with open('archeogame_saved_info.txt', 'r') as textfile:
 # Главный цикл
 while flag is False:
     print(f'{reader[choice]["text"]}\n')
-    
+
     # Проверка наличия дополнительных параметров уровня и возможности игрока пользоваться ими
     if 'helpful ability' in reader[choice] and reader[choice]['helpful ability'] in ability:
         print(f'{reader[choice]["text2"]}\n')
@@ -60,7 +61,7 @@ while flag is False:
             attempts = 2
         attempts += int(reader[choice]['attempts'])
         print(f'Попыток осталось: {attempts}\n')
-        
+
     # Проверка на окончание сюжетной линии
     if 'lost' in reader[choice] or attempts == 0 or 'win' in reader[choice]:
         flag = True
@@ -70,7 +71,7 @@ while flag is False:
             print('Хорошая работа! Это не такой значительный урон. Храм будет безопасен для следующих исследований')
         elif 'win' in reader[choice_copy]:
             print('Так себе результат. Храм будет небезопасен для будущих исследований')
-        
+
         # Предложение пользователю сыграть ещё раз
         question = input('\nНе хотите сыграть ещё раз? Ответьте "Да" или "Нет" \n')
         if question.lower() == 'да':
@@ -85,7 +86,6 @@ while flag is False:
         else:
             flag = True
             continue
-        save_progress(choice, '0', ability)
 
     # Основной код
     if 'sp' not in reader[choice] and (question == '' or question.lower() == 'да'):
@@ -93,7 +93,7 @@ while flag is False:
             for key, val in reader[choice]['choices'].items():
                 print(f'{key} - {val}')
                 keys.append(key)
-            if 'helpful ability' in reader[choice] and ability in reader[choice]['helpful ability'] and\
+            if 'helpful ability' in reader[choice] and ability in reader[choice]['helpful ability'] and \
                     'choices2' in reader[choice]:
                 for k, v in reader[choice]['choices2'].items():
                     print(f'{k} - {v}')
@@ -104,37 +104,37 @@ while flag is False:
                 while choice not in keys:
                     choice = input('\nТакого варианта нет! Введите один из данных Вам вариантов: ')
             else:
-                
+
                 # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции inptout
                 try:
                     choice = inptout(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ')
-
                 except Exception:
                     if choice_copy in ['21', '28', '29', '30']:
                         choice = 't.o'
                         os.system(check_os())
-                        continue
                     else:
                         choice = 't.o2'
                         os.system(check_os())
-                        continue
-
+                    continue
                 if choice not in keys:
                     choice = 'er'
-            
+
             # Проверка наличия специальных игровых параметров в уровне
             choice_copy = choice
             if 'temple damage' in reader[choice]:
                 temple_damage += int(reader[choice]['temple damage'])
             if 'ability' in reader[choice]:
                 ability = reader[choice]['ability']
-
         save_progress(choice, temple_damage, ability)
 
     # Добавляю random в отдельные этапы
     if 'probability' in reader[choice]:
         if random.randint(1, 10) not in reader[choice]['probability']:
             choice = reader[choice]['choice_change']
+
+    if choice == 'sp2':
+        temple_damage = 0
+        save_progress(choice, temple_damage, ability)
 
     keys.clear()
     os.system(check_os())
