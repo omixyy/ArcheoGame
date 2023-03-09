@@ -1,7 +1,7 @@
 import json
 import random
 import os
-from inputimeout import inputimeout as inpto
+from inputimeout import inputimeout as t_input, TimeoutOccurred
 
 
 # Функция сохранения прогресса
@@ -107,8 +107,8 @@ while flag is False:
 
                 # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции inptout
                 try:
-                    choice = inpto(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ', timeout=int(reader[choice]["timer"]))
-                except Exception:
+                    choice = t_input(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ', timeout=int(reader[choice]["timer"]))
+                except TimeoutOccurred:
                     if choice_copy in ['21', '28', '29', '30']:
                         choice = 't.o'
                         os.system(check_os())
