@@ -105,7 +105,7 @@ while flag is False:
                     choice = input('\nТакого варианта нет! Введите один из данных Вам вариантов: ')
             else:
 
-                # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции inptout
+                # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции t_input()
                 try:
                     choice = t_input(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ', timeout=int(reader[choice]["timer"]))
                 except TimeoutOccurred:
