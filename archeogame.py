@@ -115,8 +115,8 @@ while flag is False:
 
                 # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции t_input()
                 try:
-                    choice = int(t_input(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ',
-                                         timeout=int(reader[choice]["timer"])))
+                    choice = keys_to_json_lvl[int(t_input(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ',
+                                         timeout=int(reader[choice]["timer"])))]
                 except TimeoutOccurred:
                     if choice_copy in ['21', '28', '29', '30']:
                         choice = 't.o'
