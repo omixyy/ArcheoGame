@@ -55,7 +55,7 @@ while flag is False:
     # Проверка наличия дополнительных параметров уровня и возможности игрока пользоваться ими
     if 'helpful ability' in reader[choice] and reader[choice]['helpful ability'] in ability:
         print(f'{reader[choice]["text2"]}\n')
-        
+
     # Считаем количество попыток на определённом этапе
     if 'attempts' in reader[choice]:
         if '7' in choice:
@@ -78,9 +78,8 @@ while flag is False:
         # Предложение пользователю сыграть ещё раз
         question = input('\nНе хотите сыграть ещё раз? Ответьте "Да" или "Нет" \n')
         if question.lower() == 'да':
-            temple_damage = 0
+            temple_damage, flag = 0, False
             keys, ability = list(), '-'
-            flag = False
             choice_copy = choice
             attempts, choice = 2, '0'
             os.system(check_os())
@@ -91,7 +90,7 @@ while flag is False:
 
     # Основной код
     if 'sp' not in reader[choice] and (question == '' or question.lower() == 'да'):
-        
+
         # Печатаем варианты
         if 'lost' not in reader[choice]:
             for key, val in reader[choice]['choices'].items():
@@ -106,7 +105,7 @@ while flag is False:
                     keys.append(k)
                     keys_to_json_lvl[key_counter] = k
                     key_counter += 1
-                    
+
             # Обычный ввод без таймера
             if 'timer' not in reader[choice]:
                 choice = input('\nВведите номер варианта: ')
@@ -114,9 +113,10 @@ while flag is False:
                 while choice == '' or int(choice) not in keys_to_json_lvl:
                     choice = input('\nТакого варианта нет! Введите один из данных Вам вариантов: ')
             else:
-                
+
                 # Ввод с таймером
-                # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции t_input()
+                # Использование конструкции try-except для избежания падения программы
+                # после истечения времени в таймере функции t_input()
                 try:
                     choice = t_input(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ',
                                      timeout=int(reader[choice]["timer"]))
