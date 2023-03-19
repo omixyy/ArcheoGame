@@ -1,7 +1,6 @@
 import json
 import random
 import os
-import time
 from inputimeout import inputimeout as t_input, TimeoutOccurred
 
 
@@ -56,6 +55,8 @@ while flag is False:
     # Проверка наличия дополнительных параметров уровня и возможности игрока пользоваться ими
     if 'helpful ability' in reader[choice] and reader[choice]['helpful ability'] in ability:
         print(f'{reader[choice]["text2"]}\n')
+        
+    # Считаем количество попыток на определённом этапе
     if 'attempts' in reader[choice]:
         if '7' in choice:
             attempts = 2
@@ -90,6 +91,8 @@ while flag is False:
 
     # Основной код
     if 'sp' not in reader[choice] and (question == '' or question.lower() == 'да'):
+        
+        # Печатаем варианты
         if 'lost' not in reader[choice]:
             for key, val in reader[choice]['choices'].items():
                 print(f'{key_counter} - {val}')
@@ -103,15 +106,17 @@ while flag is False:
                     keys.append(k)
                     keys_to_json_lvl[key_counter] = k
                     key_counter += 1
+                    
+            # Обычный ввод без таймера
             if 'timer' not in reader[choice]:
                 choice = input('\nВведите номер варианта: ')
                 choice_copy = choice
                 while choice == '' or int(choice) not in keys_to_json_lvl:
                     choice = input('\nТакого варианта нет! Введите один из данных Вам вариантов: ')
             else:
-
-                # Использование конструкции try-except для избежания падения
-                # программы после истечения времени в таймере функции t_input()
+                
+                # Ввод с таймером
+                # Использование конструкции try-except для избежания падения программы после истечения времени в таймере функции t_input()
                 try:
                     choice = t_input(prompt=f'\nУ Вас {reader[choice]["timer"]} секунд на ввод номера варианта: ',
                                      timeout=int(reader[choice]["timer"]))
