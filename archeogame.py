@@ -114,7 +114,7 @@ while flag is False:
             if 'timer' not in reader[choice]:
                 choice = input('\nВведите номер варианта: ')
                 choice_copy = choice
-                while choice == '' or int(choice) not in keys_to_json_lvl:
+                while choice == '' or any([s.isalpha() for s in choice]) or int(choice) not in keys_to_json_lvl:
                     choice = input('\nТакого варианта нет! Введите один из данных Вам вариантов: ')
             else:
 
