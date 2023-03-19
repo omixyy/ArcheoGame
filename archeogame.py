@@ -148,7 +148,8 @@ while flag is False:
     if 'probability' in reader[choice]:
         if random.randint(1, 10) not in reader[choice]['probability']:
             choice = reader[choice]['choice_change']
-
+            
+    # Обнуляем урон храму после успешного использования заклинания
     if choice == 'sp2':
         temple_damage = 0
 
