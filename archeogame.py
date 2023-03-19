@@ -150,7 +150,7 @@ while flag is False:
             choice = reader[choice]['choice_change']
             
     # Обнуляем урон храму после успешного использования заклинания
-    if keys_to_json_lvl[int(choice)] == 'sp2':
+    if choice == 'sp2':
         temple_damage = 0
 
     save_progress(choice, temple_damage, ability)
