@@ -20,8 +20,7 @@ def check_os():
 
 
 # Начальные значения переменных
-temple_damage = 0
-attempts = 2
+temple_damage, attempts = 0, 2
 keys, ability = list(), '-'
 flag = False
 question, choice_copy = '', ''
@@ -82,8 +81,7 @@ while flag is False:
             keys, ability = list(), '-'
             flag = False
             choice_copy = choice
-            choice = '0'
-            attempts = 2
+            attempts, choice = 2, '0'
             os.system(check_os())
             print(f'{reader[choice]["text"]}\n')
         else:
