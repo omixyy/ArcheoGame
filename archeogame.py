@@ -134,7 +134,7 @@ while flag is False:
                     continue
                 if choice not in [str(i) for i in range(1, 11)] or int(choice) not in keys_to_json_lvl:
                     choice = 'er'
-            if choice not in ['t.o', 't,o2', 'er']:
+            if choice not in ['t.o', 't.o2', 'er']:
                 choice = keys_to_json_lvl[int(choice)]
 
             # Проверка наличия специальных игровых параметров в уровне
