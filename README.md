@@ -109,4 +109,4 @@
 
 [Она здесь обязательно будет...]
 
-[Снимок экрана 2023-03-17 082739](https://user-images.githubusercontent.com/99555437/229341993-9ce4974e-bd73-4ff3-9f6c-262fdb4377ba.png)
+![Снимок экрана 2023-03-17 082739](https://user-images.githubusercontent.com/99555437/229342060-459e137e-9793-4de4-8a4a-783fba61b837.png)
